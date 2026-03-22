@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 48">
+  <!-- Number 10 -->
+  <text x="0" y="34" font-family="'Georgia', 'DM Serif Display', serif" font-weight="700" font-size="38" fill="#ffffff">10</text>
+  <!-- Shelf line under "10" -->
+  <rect x="0" y="38" width="48" height="3" rx="1.5" fill="#2D6A4F"/>
+  <!-- Word "полок" -->
+  <text x="54" y="28" font-family="'Georgia', 'DM Serif Display', serif" font-size="24" fill="#ffffff" letter-spacing="1.5">полок</text>
+  <!-- Subtitle -->
+  <text x="54" y="42" font-family="'Arial', 'DM Sans', sans-serif" font-size="9" fill="rgba(255,255,255,0.6)" letter-spacing="2">МЕБЕЛЬ НА ЗАКАЗ</text>
+</svg>
