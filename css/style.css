@@ -1144,6 +1144,8 @@ img {
   overflow: hidden;
   box-shadow: var(--shadow);
   transition: transform var(--transition), box-shadow var(--transition);
+  display: flex;
+  flex-direction: column;
 }
 
 .product-card:hover {
@@ -1154,10 +1156,20 @@ img {
 .product-card img,
 .product-card .img-placeholder {
   border-radius: 0;
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
 }
 
 .product-info {
   padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-info .btn-primary {
+  margin-top: auto;
 }
 
 .product-name {
