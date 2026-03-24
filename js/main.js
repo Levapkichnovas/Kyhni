@@ -149,12 +149,12 @@ document.addEventListener('DOMContentLoaded', () => {
   let lightboxItems = [];
   let lightboxIndex = 0;
 
-  function openLightbox(index) {
-    lightboxItems = [...document.querySelectorAll('.gallery-item:not(.hidden)')];
+  function openLightbox(index, items) {
+    lightboxItems = items || [...document.querySelectorAll('.gallery-item:not(.hidden)')];
     lightboxIndex = index;
     const item = lightboxItems[lightboxIndex];
     if (!item) return;
-    const img = item.querySelector('img');
+    const img = item.querySelector('img') || item;
     if (img && lightboxImg) {
       lightboxImg.src = img.src;
       lightboxImg.alt = img.alt || '';
@@ -168,24 +168,38 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.remove('no-scroll');
   }
 
+  // Gallery items lightbox
   document.querySelectorAll('.gallery-item').forEach((item, i) => {
     item.addEventListener('click', () => openLightbox(i));
+  });
+
+  // Product card images lightbox
+  const productCardImgs = [...document.querySelectorAll('.product-card img')];
+  productCardImgs.forEach((img, i) => {
+    img.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openLightbox(i, productCardImgs);
+    });
   });
 
   if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
   if (lightbox) lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
 
+  function getLightboxItemImg(item) {
+    return item.querySelector ? (item.querySelector('img') || item) : item;
+  }
+
   if (lightboxPrev) lightboxPrev.addEventListener('click', (e) => {
     e.stopPropagation();
     lightboxIndex = (lightboxIndex - 1 + lightboxItems.length) % lightboxItems.length;
-    const img = lightboxItems[lightboxIndex]?.querySelector('img');
+    const img = getLightboxItemImg(lightboxItems[lightboxIndex]);
     if (img && lightboxImg) { lightboxImg.src = img.src; }
   });
 
   if (lightboxNext) lightboxNext.addEventListener('click', (e) => {
     e.stopPropagation();
     lightboxIndex = (lightboxIndex + 1) % lightboxItems.length;
-    const img = lightboxItems[lightboxIndex]?.querySelector('img');
+    const img = getLightboxItemImg(lightboxItems[lightboxIndex]);
     if (img && lightboxImg) { lightboxImg.src = img.src; }
   });
 

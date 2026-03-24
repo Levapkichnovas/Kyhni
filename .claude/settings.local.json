@@ -3,7 +3,12 @@
     "allow": [
       "Bash(for f:*)",
       "Bash(do sed:*)",
-      "Bash(done)"
+      "Bash(done)",
+      "Bash(sort -k5 -rh)",
+      "Bash(convert --version)",
+      "Bash(node -e \"try { require\\(''sharp''\\); console.log\\(''sharp available''\\); } catch\\(e\\) { console.log\\(''no sharp module''\\); }\")",
+      "Bash(python -c \"print\\(''hello''\\)\")",
+      "Bash(node -e \"try { new Function\\(require\\(''fs''\\).readFileSync\\(''c:/Users/user/Desktop/Kyhni/js/main.js'',''utf8''\\)\\); console.log\\(''VALID JS''\\); } catch\\(e\\) { console.log\\(''ERROR:'', e.message\\); }\")"
     ]
   }
 }
