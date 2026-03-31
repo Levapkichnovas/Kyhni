@@ -88,8 +88,8 @@ img {
 .btn-outline {
   display: inline-block;
   background: transparent;
-  color: var(--accent-wood);
-  border: 2px solid var(--accent-wood);
+  color: #1B3A4B;
+  border: 2px solid #1B3A4B;
   padding: 14px 32px;
   border-radius: 8px;
   font-family: var(--font-body);
@@ -101,7 +101,7 @@ img {
 }
 
 .btn-outline:hover {
-  background: var(--accent-wood);
+  background: #1B3A4B;
   color: #fff;
   transform: translateY(-2px);
 }
@@ -347,14 +347,14 @@ img {
 
 .hero-image img {
   width: 100%;
-  border-radius: var(--radius-lg);
+  border-radius: 8px;
   object-fit: cover;
   aspect-ratio: 4/5;
 }
 
 /* ===== MARQUEE ===== */
 .marquee-section {
-  background: var(--accent-wood);
+  background: #1B3A4B;
   padding: 14px 0;
   overflow: hidden;
 }
@@ -626,7 +626,7 @@ img {
 }
 
 .slide-2 {
-  background: linear-gradient(135deg, var(--accent-green), #7ba37e);
+  background: linear-gradient(135deg, #1B3A4B, #2a5568);
 }
 
 .slide-3 {
@@ -862,7 +862,7 @@ img {
 
 /* ===== FOOTER ===== */
 .footer {
-  background: var(--accent-wood);
+  background: #1B3A4B;
   color: var(--bg-main);
   padding: 60px 0 0;
 }
@@ -1041,36 +1041,36 @@ img {
 }
 
 /* ===== WHATSAPP BUTTON ===== */
-.whatsapp-btn {
+.max-btn {
   position: fixed;
   bottom: 28px;
   right: 28px;
   width: 60px;
   height: 60px;
-  background: #25D366;
+  background: #0077FF;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 900;
-  box-shadow: 0 4px 16px rgba(37,211,102,0.4);
+  box-shadow: 0 4px 16px rgba(0,119,255,0.4);
   animation: pulse 2s infinite;
   transition: transform var(--transition);
 }
 
-.whatsapp-btn:hover {
+.max-btn:hover {
   transform: scale(1.1);
 }
 
-.whatsapp-btn svg {
+.max-btn svg {
   width: 30px;
   height: 30px;
   fill: #fff;
 }
 
 @keyframes pulse {
-  0% { box-shadow: 0 0 0 0 rgba(37,211,102,0.5); }
-  70% { box-shadow: 0 0 0 16px rgba(37,211,102,0); }
+  0% { box-shadow: 0 0 0 0 rgba(0,119,255,0.5); }
+  70% { box-shadow: 0 0 0 16px rgba(0,119,255,0); }
   100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
 }
 
