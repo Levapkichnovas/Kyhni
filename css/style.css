@@ -339,6 +339,40 @@ img {
   animation: goldPulse 0.8s ease 2s 1;
 }
 
+.hero-trust {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-top: 40px;
+  opacity: 0;
+  animation: heroFadeUp 0.8s ease 0.9s forwards;
+}
+
+.hero-trust-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-trust-number {
+  font-family: var(--font-heading);
+  font-size: 28px;
+  font-weight: 700;
+  color: #1B3A4B;
+  line-height: 1;
+}
+
+.hero-trust-label {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+.hero-trust-divider {
+  width: 1px;
+  height: 36px;
+  background: var(--border-color);
+}
+
 .hero-image {
   flex: 1;
   opacity: 0;
@@ -1788,6 +1822,9 @@ img {
   .products-grid { grid-template-columns: 1fr; }
   .stats-grid { grid-template-columns: 1fr 1fr; }
   .hero-buttons { flex-direction: column; align-items: center; }
+  .hero-trust { gap: 16px; justify-content: center; }
+  .hero-trust-number { font-size: 22px; }
+  .hero-trust-label { font-size: 12px; }
 
   .modal { padding: 28px 20px; }
   .slide { padding: 24px; min-height: 200px; }
