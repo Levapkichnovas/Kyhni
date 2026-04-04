@@ -1075,28 +1075,28 @@ img {
 }
 
 /* ===== WHATSAPP BUTTON ===== */
-.max-btn {
+.tg-btn {
   position: fixed;
   bottom: 28px;
   right: 28px;
   width: 60px;
   height: 60px;
-  background: #0077FF;
+  background: #26A5E4;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 900;
-  box-shadow: 0 4px 16px rgba(0,119,255,0.4);
+  box-shadow: 0 4px 16px rgba(38,165,228,0.4);
   animation: pulse 2s infinite;
   transition: transform var(--transition);
 }
 
-.max-btn:hover {
+.tg-btn:hover {
   transform: scale(1.1);
 }
 
-.max-btn svg {
+.tg-btn svg {
   width: 30px;
   height: 30px;
   fill: #fff;
