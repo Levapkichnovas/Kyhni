@@ -269,13 +269,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // ===== INPUT SANITIZATION =====
-  function sanitizeInput(str) {
-    const div = document.createElement('div');
-    div.textContent = str;
-    return div.innerHTML;
-  }
-
   // Sanitize text inputs on blur
   document.querySelectorAll('input[type="text"], textarea').forEach(input => {
     input.addEventListener('blur', () => {
@@ -288,7 +281,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const FORM_COOLDOWN = 5000; // 5 seconds between submissions
 
   // ===== FORM SUBMISSIONS =====
-  const FORMSUBMIT_URL = 'https://formsubmit.co/ajax/sova_sp@mail.ru';
+  const FORMSUBMIT_URL = 'https://formsubmit.co/ajax/4cf030ac4c5fd30f55cf45ad8193f0e75c7697dfeb25822a7381afc36919908e';
 
   document.querySelectorAll('form').forEach(form => {
     form.addEventListener('submit', async (e) => {
@@ -316,6 +309,7 @@ document.addEventListener('DOMContentLoaded', () => {
       formData.append('_subject', 'Новая заявка с сайта Кухни на заказ');
       formData.append('_template', 'table');
       formData.append('_captcha', 'false');
+      formData.append('_honey', '');
       formData.append('Страница', document.title + ' (' + window.location.pathname + ')');
 
       try {

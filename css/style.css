@@ -5,7 +5,7 @@
   --text-main: #1A1A1A;
   --text-secondary: #6B6560;
   --accent-wood: #3E2B1E;
-  --accent-terracotta: #2D6A4F;
+  --accent-terracotta: #1B3A4B;
   --accent-green: #5B7C5E;
   --border-color: #E0D8CE;
   --shadow: 0 4px 20px rgba(0,0,0,0.06);
@@ -79,10 +79,10 @@ img {
 }
 
 .btn-primary:hover {
-  background: #245840;
-  border-color: #245840;
+  background: #142D3A;
+  border-color: #142D3A;
   transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(45,106,79,0.3);
+  box-shadow: 0 4px 16px rgba(27,58,75,0.3);
 }
 
 .btn-outline {
