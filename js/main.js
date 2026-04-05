@@ -281,7 +281,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const FORM_COOLDOWN = 5000; // 5 seconds between submissions
 
   // ===== FORM SUBMISSIONS =====
-  const FORMSUBMIT_URL = 'https://formsubmit.co/ajax/4cf030ac4c5fd30f55cf45ad8193f0e75c7697dfeb25822a7381afc36919908e';
+  const FORMSUBMIT_URL = 'https://formsubmit.co/ajax/27753860d2568c45b3db2e6a7c472621e5f125b837323e83fb140b00550b1abe';
 
   document.querySelectorAll('form').forEach(form => {
     form.addEventListener('submit', async (e) => {
