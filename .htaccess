@@ -1,0 +1,35 @@
+# === Security Headers ===
+<IfModule mod_headers.c>
+    # HTTPS only (1 year)
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+
+    # Clickjacking protection
+    Header always set X-Frame-Options "SAMEORIGIN"
+
+    # Prevent MIME-type sniffing
+    Header always set X-Content-Type-Options "nosniff"
+
+    # XSS filter for older browsers
+    Header always set X-XSS-Protection "1; mode=block"
+
+    # Content Security Policy
+    Header always set Content-Security-Policy "default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; frame-src https://yandex.ru; connect-src https://formsubmit.co; img-src 'self' data:; frame-ancestors 'self';"
+
+    # Referrer Policy
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+    # Permissions Policy
+    Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+</IfModule>
+
+# === Block access to hidden files ===
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# === Allow .well-known for SSL certificate renewal ===
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule "^\.well-known/" - [L]
+</IfModule>
