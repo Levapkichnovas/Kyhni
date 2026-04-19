@@ -269,33 +269,39 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Sanitize text inputs on blur
-  document.querySelectorAll('input[type="text"], textarea').forEach(input => {
-    input.addEventListener('blur', () => {
-      input.value = input.value.replace(/[<>"'&]/g, '');
-    });
-  });
-
   // Rate limiting for form submissions
   const formSubmitTimestamps = new WeakMap();
-  const FORM_COOLDOWN = 5000; // 5 seconds between submissions
+  const FORM_COOLDOWN = 5000;
+
+  // Mark each form with render timestamp (for server time-of-fill check)
+  document.querySelectorAll('form').forEach(form => {
+    form.dataset.ts = Math.floor(Date.now() / 1000).toString();
+  });
 
   // ===== FORM SUBMISSIONS =====
-  const FORMSUBMIT_URL = 'https://formsubmit.co/ajax/27753860d2568c45b3db2e6a7c472621e5f125b837323e83fb140b00550b1abe';
+  const SEND_URL = '/send.php';
+
+  const showMessage = (form, text, autoRevert = true) => {
+    const success = form.querySelector('.form-success')
+      || form.closest('.modal, .cta-section, .contact-form-section, section')?.querySelector('.form-success');
+    if (!success) return;
+    const original = success.dataset.original || success.textContent;
+    if (!success.dataset.original) success.dataset.original = original;
+    success.textContent = text;
+    success.classList.add('show');
+    setTimeout(() => {
+      success.classList.remove('show');
+      if (autoRevert) success.textContent = success.dataset.original;
+    }, 4000);
+  };
 
   document.querySelectorAll('form').forEach(form => {
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      // Rate limiting
       const lastSubmit = formSubmitTimestamps.get(form) || 0;
       if (Date.now() - lastSubmit < FORM_COOLDOWN) return;
       formSubmitTimestamps.set(form, Date.now());
-
-      // Sanitize all inputs before processing
-      form.querySelectorAll('input[type="text"], textarea').forEach(input => {
-        input.value = input.value.replace(/[<>"'&]/g, '').trim();
-      });
 
       const submitBtn = form.querySelector('button[type="submit"]');
       const originalText = submitBtn ? submitBtn.textContent : '';
@@ -304,49 +310,29 @@ document.addEventListener('DOMContentLoaded', () => {
         submitBtn.textContent = 'Отправка...';
       }
 
-      // Collect form data
       const formData = new FormData(form);
-      formData.append('_subject', 'Новая заявка с сайта Кухни на заказ');
-      formData.append('_template', 'table');
-      formData.append('_captcha', 'false');
-      formData.append('_honey', '');
-      formData.append('Страница', document.title + ' (' + window.location.pathname + ')');
+      formData.append('form_ts', form.dataset.ts || '');
+      formData.append('hp_field', '');
+      formData.append('page', document.title + ' (' + window.location.pathname + ')');
 
       try {
-        const response = await fetch(FORMSUBMIT_URL, {
+        const response = await fetch(SEND_URL, {
           method: 'POST',
           headers: { 'Accept': 'application/json' },
-          body: formData
+          body: formData,
+          credentials: 'same-origin'
         });
+        const data = await response.json().catch(() => ({ ok: false }));
 
-        const success = form.querySelector('.form-success') || form.closest('.modal, .cta-section, .contact-form-section, section')?.querySelector('.form-success');
-
-        if (response.ok) {
-          if (success) {
-            success.classList.add('show');
-            setTimeout(() => success.classList.remove('show'), 4000);
-          }
+        if (response.ok && data.ok) {
+          showMessage(form, form.querySelector('.form-success')?.dataset.original
+            || 'Спасибо! Мы свяжемся с вами в ближайшее время.');
           form.reset();
         } else {
-          if (success) {
-            success.textContent = 'Ошибка отправки. Позвоните нам!';
-            success.classList.add('show');
-            setTimeout(() => {
-              success.textContent = 'Спасибо! Мы свяжемся с вами в ближайшее время.';
-              success.classList.remove('show');
-            }, 4000);
-          }
+          showMessage(form, data.error || 'Ошибка отправки. Позвоните нам!');
         }
       } catch {
-        const success = form.querySelector('.form-success') || form.closest('.modal, .cta-section, .contact-form-section, section')?.querySelector('.form-success');
-        if (success) {
-          success.textContent = 'Ошибка сети. Позвоните нам!';
-          success.classList.add('show');
-          setTimeout(() => {
-            success.textContent = 'Спасибо! Мы свяжемся с вами в ближайшее время.';
-            success.classList.remove('show');
-          }, 4000);
-        }
+        showMessage(form, 'Ошибка сети. Позвоните нам!');
       } finally {
         if (submitBtn) {
           submitBtn.disabled = false;

@@ -2,6 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /image/logovar/
 
-Sitemap: https://10polok.ru/sitemap.xml
+Sitemap: https://www.10polok.ru/sitemap.xml
 
-Host: 10polok.ru
+Host: www.10polok.ru
