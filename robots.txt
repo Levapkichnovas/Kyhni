@@ -1,6 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /image/logovar/
 
 Sitemap: https://www.10polok.ru/sitemap.xml
 
